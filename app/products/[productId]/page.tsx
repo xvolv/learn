@@ -1,22 +1,25 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
-type Props = {
-  params: Promise<{
-    productId: string;
-  }>;
-  searchParams: Promise<{
-    type: string;
-  }>;
-};
 
-const page = async ({ params, searchParams }: Props) => {
-  const { productId } = await params;
-  const { type } = await searchParams;
+const Page = () => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/");
+  };
+  const params = useParams(); // { productId: string }
+  const searchParams = useSearchParams(); // URLSearchParams instance
+
   return (
     <div>
-      {" "}
-      product ID: {productId} type : {type}
+      Product ID: {params.productId} <br />
+      Type: {searchParams.get("type")}
+      <button onClick={handleClick}> place order</button>
     </div>
   );
 };
 
-export default page;
+export default Page;
+
+
