@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Header from "./components/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
   title: {
     default: "fall back for childen route",
     template: "%s | sal",
-   
   },
   description: "",
 };
@@ -31,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
-
       </body>
     </html>
   );

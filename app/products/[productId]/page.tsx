@@ -2,8 +2,10 @@
 import { useRouter } from "next/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
-
+import { usePathname } from "next/navigation";
 const Page = () => {
+
+  const path = usePathname();
   const router = useRouter();
   const handleClick = () => {
     router.push("/");
