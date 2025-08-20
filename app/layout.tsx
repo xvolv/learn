@@ -25,25 +25,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-    
-        <div>
-          <b>codevolution</b>
-          <br />
-          <Link
-            href="/login"
-            className={path === "/login" ? "text-red-600" : ""}
-          >
-           - login -
-          </Link>
-          
-          <Link
-            href="/register"
-            className={path === "/register" ? "text-red-600" : ""}
-          >
-             - Register -
-          </Link>
-          <br />
-        </div>
         {children}
       </body>
     </html>
