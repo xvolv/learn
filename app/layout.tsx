@@ -1,7 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "./components/Header";
 import "./globals.css";
 import Link from "next/link";
 
@@ -26,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
+    
         <div>
           <b>codevolution</b>
           <br />
