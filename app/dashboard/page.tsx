@@ -1,11 +1,4 @@
-import React from "react";
-
-const page = () => {
-  return (
-    <div>
-      <h1>dashboard</h1>
-    </div>
-  );
-};
-
-export default page;
+export default function DashboardHome() {
+  console.log("Main children rendered");
+  return <div>Main Dashboard - {Math.random()}</div>;
+}
