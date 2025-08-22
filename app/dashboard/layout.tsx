@@ -1,86 +1,29 @@
-// app/dashboard/layout.tsx
-"use client";
+import React from "react";
 
-import React, { useState } from 'react';
-
-const Layout = ({
+const layout = ({
   children,
-  users,
-  notifications,
-  revenue,
+  left,
+  right,
 }: {
   children: React.ReactNode;
-  revenue: React.ReactNode;
-  users: React.ReactNode;
-  notifications: React.ReactNode;
+  left: React.ReactNode;
+  right: React.ReactNode;
 }) => {
-  const [refreshKeys, setRefreshKeys] = useState({
-    users: 0,
-    notifications: 0,
-    revenue: 0
-  });
-
-  const refreshSlot = (slot: keyof typeof refreshKeys) => {
-    setRefreshKeys(prev => ({
-      ...prev,
-      [slot]: prev[slot] + 1
-    }));
-  };
-
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Main content */}
-        <div className="md:col-span-2 bg-white p-6 rounded-xl shadow-md">
-          {children}
-        </div>
-
-        {/* Users slot */}
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Users</h2>
-            <button
-              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-md text-sm hover:bg-blue-200"
-              onClick={() => refreshSlot('users')}
-            >
-              Refresh
-            </button>
-          </div>
-          <div key={refreshKeys.users}>{users}</div>
-        </div>
-
-        {/* Notifications slot */}
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Notifications</h2>
-            <button
-              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-md text-sm hover:bg-blue-200"
-              onClick={() => refreshSlot('notifications')}
-            >
-              Refresh
-            </button>
-          </div>
-          <div key={refreshKeys.notifications}>{notifications}</div>
-        </div>
-
-        {/* Revenue slot */}
-        <div className="bg-white p-6 rounded-xl shadow-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Revenue</h2>
-            <button
-              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-md text-sm hover:bg-blue-200"
-              onClick={() => refreshSlot('revenue')}
-            >
-              Refresh
-            </button>
-          </div>
-          <div key={refreshKeys.revenue}>{revenue}</div>
-        </div>
+    <div className="border-2 border-b-gray-800 w-[500px] h-[600px] mx-3.5 my-4 shadow-lg rounded-xl">
+      <section className="w-[200px] border-2 h-[400px] mt-2 ml-2 shadow-md rounded-lg">
+        {children}
+      </section>
+      <div className="flex">
+        <section className="w-[400px] h-[170px] border-2 mt-2 ml-2 shadow-md rounded-lg">
+          {left}
+        </section>
+        <section className="w-[260px] ml-4 mt-2 border-2 h-[400px] absolute top-16 left-40 shadow-2xl  rounded-lg">
+          {right}
+        </section>
       </div>
     </div>
   );
 };
 
-export default Layout;
+export default layout;
