@@ -1,15 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Next.js client router
 
 const Right = () => {
   const [nickname, setNickname] = useState("");
   const [zodiac, setZodiac] = useState("");
   const [email, setEmail] = useState(""); // New field
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Nickname: ${nickname}\nZodiac: ${zodiac}\nEmail: ${email}`);
+
+    // Conditional routing
+    if (nickname.trim().toLowerCase() === "admin") {
+      router.push("/admin"); // navigate to /admin
+    } else {
+      alert(`Nickname: ${nickname}\nZodiac: ${zodiac}\nEmail: ${email}`);
+    }
   };
 
   return (
