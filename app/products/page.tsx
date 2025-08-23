@@ -1,10 +1,16 @@
-import React from "react";
+// products/page.tsx
+import { headers } from "next/headers";
 
 const Page = async () => {
-  const res = await fetch("http://localhost:3000/api/hello", { cache: "no-store" }); 
-  const data = await res.json();
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const protocol = headersList.get("x-forwarded-proto") ?? "http";
 
-  return <div>text : {JSON.stringify(data)}</div>;
+  const res = await fetch(`${protocol}://${host}/api/hello`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return <div>hello {data.msg}</div>;
 };
 
 export default Page;
