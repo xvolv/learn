@@ -1,16 +1,27 @@
-// products/page.tsx
-import { headers } from "next/headers";
+import { span } from "framer-motion/client";
+import React from "react";
 
-const Page = async () => {
-  const headersList = await headers();
-  const host = headersList.get("host");
-  const protocol = headersList.get("x-forwarded-proto") ?? "http";
-
-  const res = await fetch(`${protocol}://${host}/api/hello`, {
-    cache: "no-store",
-  });
+const page = async () => {
+  type comment = {
+    id: number;
+    text: string;
+  };
+  const res = await fetch("http://localhost:3000/api/hello");
+  const comment = await fetch("http://localhost:3000/api/comments");
   const data = await res.json();
-  return <div>hello {data.msg}</div>;
+  const commentObject = await comment.json();
+  console.log("--", commentObject.message);
+  return (
+    <div>
+      {" "}
+      we got this = {data.message} .... <br />
+      <ul>
+        {commentObject.message.map((items: comment) => {
+          return <li>{items.id} : {items.text}</li>;
+        })}
+      </ul>
+    </div>
+  );
 };
 
-export default Page;
+export default page;
