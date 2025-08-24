@@ -1,25 +1,19 @@
-import { span } from "framer-motion/client";
 import React from "react";
-
+import CommentComponent from "../components/CommentComponent";
 const page = async () => {
-  type comment = {
-    id: number;
-    text: string;
-  };
-  const res = await fetch("http://localhost:3000/api/hello");
-  const comment = await fetch("http://localhost:3000/api/comments");
+  const res = await fetch("http://localhost:3000/api/comments");
   const data = await res.json();
-  const commentObject = await comment.json();
-  console.log("--", commentObject.message);
+  const messages = data.message;
+  console.log("data", data);
+  console.log("data.message", data.message);
   return (
-    <div>
-      {" "}
-      we got this = {data.message} .... <br />
-      <ul>
-        {commentObject.message.map((items: comment) => {
-          return <li>{items.id} : {items.text}</li>;
-        })}
-      </ul>
+    <div className="flex justify-center ">
+      <div>
+        <h1 className="text-center bg-red-500 mt-14">test post</h1>
+        <hr className="mb-4" />
+
+        <CommentComponent messages={messages} />
+      </div>
     </div>
   );
 };
