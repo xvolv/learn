@@ -1,7 +1,7 @@
 import React from "react";
 import CommentComponent from "../components/CommentComponent";
 const page = async () => {
-  const res = await fetch("http://localhost:3000/api/comments");
+  const res = await fetch("http://localhost:3000/api/comments/2");
   const data = await res.json();
   const messages = data.message;
   console.log("data", data);
