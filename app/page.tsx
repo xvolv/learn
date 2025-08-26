@@ -1,9 +1,9 @@
-import React from 'react'
+import SearchBox from "./components/SearchBox";
 
-const page = () => {
+export default function Page() {
   return (
-    <div>page</div>
-  )
+    <main className="flex items-center justify-center min-h-screen">
+      <SearchBox />
+    </main>
+  );
 }
-
-export default page
