@@ -1,3 +1,4 @@
+import AddComment from "@/components/AddComponent";
 import { Comment } from "./lib/comments/comments";
 export default async function Page() {
   const res = await fetch("http://localhost:3000/api/comments");
@@ -5,7 +6,7 @@ export default async function Page() {
 
   return (
     <>
-      <div>Learn GET</div>
+      <div>Learn GET & POST</div>
       <h1>List of all comments</h1>
       <span>{message}</span>
       <ul>
@@ -15,6 +16,8 @@ export default async function Page() {
           </li>
         ))}
       </ul>
+
+      <AddComment />
     </>
   );
 }
