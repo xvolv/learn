@@ -1,5 +1,20 @@
-export default function Page() {
+import { Comment } from "./lib/comments/comments";
+export default async function Page() {
+  const res = await fetch("http://localhost:3000/api/comments");
+  const { comments, message } = await res.json();
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen gap-6"></main>
+    <>
+      <div>Learn GET</div>
+      <h1>List of all comments</h1>
+      <span>{message}</span>
+      <ul>
+        {comments.map((c: Comment) => (
+          <li key={c.id}>
+            {c.id} | {c.text}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
