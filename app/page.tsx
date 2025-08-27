@@ -1,5 +1,6 @@
 import AddComment from "@/components/AddComponent";
 import { Comment } from "./lib/comments/comments";
+import CommentList from "./components/CommentList";
 export default async function Page() {
   const res = await fetch("http://localhost:3000/api/comments");
   const { comments, message } = await res.json();
@@ -18,6 +19,11 @@ export default async function Page() {
       </ul>
 
       <AddComment />
+      <hr />
+      <hr />
+      <hr />
+
+      <CommentList />
     </>
   );
 }

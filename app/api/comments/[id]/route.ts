@@ -1,7 +1,10 @@
 import { comments } from "@/lib/comments/comments";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function DELETE({ params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   const { id } = await params;
   const index = comments.findIndex((comment) => comment.id === parseInt(id));
 
@@ -14,5 +17,27 @@ export async function DELETE({ params }: { params: Promise<{ id: string }> }) {
   return NextResponse.json(
     { message: "Deleted", comment: deletedComment },
     { status: 200 }
+  );
+}
+
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
+  const comment = comments.find((c) => c.id === parseInt(id));
+  if (!comment) {
+    return (
+      NextResponse.json({ message: "comment not found" }),
+      {
+        status: 404,
+      }
+    );
+  }
+  return NextResponse.json(
+    { comment },
+    {
+      status: 200,
+    }
   );
 }

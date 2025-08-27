@@ -1,9 +1,18 @@
 import { comments } from "@/lib/comments/comments";
 import { Comment } from "@/lib/comments/comments";
 import { NextRequest, NextResponse } from "next/server";
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const search = searchParams.get("search");
+  let result = comments;
+  if (search) {
+    result = comments.filter((c) =>
+      c.text.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return NextResponse.json(
-    { message: "comments fetched successfully", comments },
+    { message: "comments fetched successfully", comments:result },
     {
       status: 200,
       headers: {
