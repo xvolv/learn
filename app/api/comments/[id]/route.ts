@@ -5,7 +5,7 @@ export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
+  const { id } = await params; // Await the params Promise
   const index = comments.findIndex((comment) => comment.id === parseInt(id));
 
   if (index === -1) {
@@ -22,22 +22,14 @@ export async function DELETE(
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params; // Await the params Promise
   const comment = comments.find((c) => c.id === parseInt(id));
+
   if (!comment) {
-    return (
-      NextResponse.json({ message: "comment not found" }),
-      {
-        status: 404,
-      }
-    );
+    return NextResponse.json({ message: "Comment not found" }, { status: 404 });
   }
-  return NextResponse.json(
-    { comment },
-    {
-      status: 200,
-    }
-  );
+
+  return NextResponse.json({ comment }, { status: 200 });
 }

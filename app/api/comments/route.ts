@@ -1,7 +1,11 @@
 import { comments } from "@/lib/comments/comments";
 import { Comment } from "@/lib/comments/comments";
 import { NextRequest, NextResponse } from "next/server";
+
 export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+  console.log("this is not -<", authHeader?.split(" ")[1]);
+
   const { searchParams } = new URL(req.url);
   const search = searchParams.get("search");
   let result = comments;
@@ -12,7 +16,7 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json(
-    { message: "comments fetched successfully", comments:result },
+    { message: "comments fetched successfully", comments: result },
     {
       status: 200,
       headers: {
