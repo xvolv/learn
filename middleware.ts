@@ -1,9 +1,12 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  console.log('Middleware processing path:', pathname); // Debug log
+  console.log('\n=== Middleware Triggered ===');
+  console.log('Path:', pathname);
+  console.log('Method:', request.method);
   
   // Only exclude the time route from redirection to prevent loops
   if (pathname === '/api/time' || pathname === '/api/time/') {
@@ -19,6 +22,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
   
+  console.log('No redirection needed');
   return NextResponse.next();
 }
 
