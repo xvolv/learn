@@ -5,6 +5,8 @@ type User = {
     username: string
 }
 const page = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    throw new Error("intentional error sent from the server page.tsx")
     const res = await fetch("https://jsonplaceholder.typicode.com/users", {
         next: { revalidate: 60 }
     });
